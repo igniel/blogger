@@ -78,6 +78,6 @@ var numComments = numComments || 5, avatarSize = avatarSize || 60, characters = 
         if (hideCredits == true) {
             hideCSS = "display:none;";
         }
-        commentsHtml += "";
+        commentsHtml += "<span style=\"font-size:8px;display:block;text-align:right;" + hideCSS + "\">widget by <a href=\"http://www.igniel.com\" target=\"_blank\">Igniel</a></span>";
         document.write(commentsHtml);
     }
