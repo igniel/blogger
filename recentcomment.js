@@ -78,4 +78,6 @@ var numComments = numComments || 5, avatarSize = avatarSize || 60, characters = 
         if (hideCredits == true) {
             hideCSS = "display:none;";
         }
+        commentsHtml += "";
+        document.write(commentsHtml);
     }
