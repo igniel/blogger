@@ -1,1 +1,48 @@
-Hai
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas LetSocify</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function getQueryVariable(queryurl,variable) {
+			if(queryurl.indexOf("?")>-1){  
+				var query = queryurl.split("?")[1];
+				var vars = query.split("&");
+				for (var i=0;i<vars.length;i++) {
+					var pair = vars[i].split("=");
+					if (pair[0] == variable) {
+						return pair[1];
+					}
+				} 
+			}
+		}
+		document.addEventListener("DOMContentLoaded", function(event) { 
+			if (window.XMLHttpRequest)  
+			{  
+				xmlhttp=new XMLHttpRequest();
+			}
+			else
+			{  
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");  
+			}
+			xmlhttp.onreadystatechange=function()  
+			{  
+				if(xmlhttp.readyState==4 && xmlhttp.status==200)    
+				{  
+					console.log(xmlhttp.responseText);
+					if(getQueryVariable(location.search,"opencanvas")==1){
+						var newDiv=document.createElement("div");
+						newDiv.innerHTML='<iframe src="'+decodeURIComponent(getQueryVariable(location.search,"redirect"))+'" style="width:100%;height:100%;top:0;left:0;position:fixed"></iframe>';
+						document.getElementsByTagName("body")[0].appendChild(newDiv);
+					}else{
+						window.top.location="http://analysis.letsocify.com/?redirect="+getQueryVariable(location.search,"redirect");
+					}
+				}  
+			};
+			xmlhttp.open("GET","https://5yj158xzyg.execute-api.us-west-2.amazonaws.com/Production?tagid="+getQueryVariable(location.search,"tagid"),true);
+			xmlhttp.send(); 	
+		});
+	</script>
+</body>
+</html>
