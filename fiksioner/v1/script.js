@@ -1,10 +1,26 @@
-// jQuery
-var fiksioner = document.createElement('script');
-fiksioner.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js';
-fiksioner.async = true;
-document.getElementsByTagName('body')[0].prepend(fiksioner);
+function loadScript( url, callback ) {
+  var script = document.createElement( "script" )
+  script.type = "text/javascript";
+  if(script.readyState) {  //IE
+    script.onreadystatechange = function() {
+      if ( script.readyState === "loaded" || script.readyState === "complete" ) {
+        script.onreadystatechange = null;
+        callback();
+      }
+    };
+  } else {  //Others
+    script.onload = function() {
+      callback();
+    };
+  }
 
-!function(){
+  script.src = url;
+  document.getElementsByTagName( "head" )[0].appendChild( script );
+}
+
+
+// call the function...
+loadScript('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', function() {
   // Menu
   document.getElementById('fiksionerMenu').addEventListener('click', function(){
     if (this.className != 'open'){
@@ -16,7 +32,6 @@ document.getElementsByTagName('body')[0].prepend(fiksioner);
       this.classList.remove('open');
     }
   });
-
   // Back To Top
   $(document).scroll(function() {
   return $(document).scrollTop() > 300 ? $('.ignielToTop').addClass('show') : $('.ignielToTop').removeClass('show')
@@ -25,4 +40,4 @@ document.getElementsByTagName('body')[0].prepend(fiksioner);
       scrollTop: '0'
     });
   });
-}(window.jQuery);
+});
