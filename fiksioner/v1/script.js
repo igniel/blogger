@@ -24,5 +24,5 @@ document.getElementsByTagName('body')[0].prepend(fiksioner);
     return $('html,body').animate({
       scrollTop: '0'
     });
-});
+  });
 }(window.jQuery);
