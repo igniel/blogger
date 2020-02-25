@@ -4,35 +4,69 @@
       <meta charset="utf-8">
       <meta content='width=device-width, initial-scale=1' name='viewport'>
       <title>Related Posts Blogger</title>
+      <link href="https://cdn.staticaly.com/img/4.bp.blogspot.com/-XoYVj_ny8ys/WCGuacPhoxI/AAAAAAAANks/0gMrbTXd_KY6oG25R5VuLUJtQ-wXAE-CgCLcB/s57/logo-AMP-1.png" rel="icon" type="image/x-icon"/>
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&amp;display=swap&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet"/>
       <style>
         body {
           font: 400 16px 'Open Sans', Arial, sans-serif;
-          background-color:#fff;
-          margin:0px;
-          padding:0px;
-          color:#333;
+          background-color: #fff;
+          margin: 0px;
+          padding: 0px;
+          color: #333;
         }
         a {
-          color:#e50a4a;
-          text-decoration:none;
+          color: #e50a4a;
         }
-        a:hover {color:#0379C4}
+        a:hover {
+          color: #ac0838;
+        }
       </style>
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&amp;display=swap&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet"/>
     </head>
     <body>
       <script>//<![CDATA[
-        function getQueryVariable(variable) {
-          var query = window.location.search.substring(1);
-          var vars = query.split("&");
-          for (var i=0;i<vars.length;i++) {
-            var pair = vars[i].split("=");
-            if(pair[0] == variable){return pair[1];}
-          }
-          return(false);
+        function saringtags(r, l) {
+            for (var e = r.split("<"), t = 0; t < e.length; t++) - 1 != e[t].indexOf(">") && (e[t] = e[t].substring(e[t].indexOf(">") + 1, e[t].length));
+            return e = e.join(""), e = e.substring(0, l - 1)
         }
-        var homePage = getQueryVariable("url"), jumlah = getQueryVariable("jumlah"), width = getQueryVariable("width"), height = getQueryVariable("height");
-        var rel = 0, judul=new Array(), urls=new Array(), gambar=new Array(); function filter(g,h){var e=g.split("<");for(var f=0;f<e.length;f++){if(e[f].indexOf(">")!=-1){e[f]=e[f].substring(e[f].indexOf(">")+1,e[f].length)}}e=e.join("");e=e.substring(0,h-1);return e}function relpostimgcuplik(h){for(var e=0;e<h.feed.entry.length;e++){var g=h.feed.entry[e];judul[rel]=g.title.$t;postcontent="";if("content" in g){postcontent=g.content.$t}else{if("summary" in g){postcontent=g.summary.$t}};if("media$thumbnail" in g){postimg=g.media$thumbnail.url}else{postimg="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAA3NCSVQICAjb4U/gAAAADElEQVQImWOor68HAAL+AX7vOF2TAAAAAElFTkSuQmCC"}gambar[rel]=postimg;for(var f=0;f<g.link.length;f++){if(g.link[f].rel=="alternate"){urls[rel]=g.link[f].href;break}}rel++}}function contains(a,e){for(var f=0;f<a.length;f++){if(a[f]==e){return true}}return false} function ignielRelatedGrid(){var v=new Array(0);var w=new Array(0);var x=new Array(0);var A=new Array(0);for(var u=0;u<urls.length;u++){if(!contains(v,urls[u])){v.length+=1;v[v.length-1]=urls[u];w.length+=1;w[w.length-1]=judul[u];x.length+=1;A.length+=1;A[A.length-1]=gambar[u]}}judul=w;urls=v;gambar=A;for(var u=0;u<judul.length;u++){var B=Math.floor((judul.length-1)*Math.random());var i=judul[u];var s=urls[u];var C=gambar[u];judul[u]=judul[B];urls[u]=urls[B];gambar[u]=gambar[B];judul[B]=i;urls[B]=s;gambar[B]=C}var r=0;var D=Math.floor((judul.length-1)*Math.random());var z=D;var q;var t=document.URL;while(r<jumlah){if(urls[D]!=t){q="<li>";q+="<div class='thumb'><a href='"+urls[D]+"' title='"+judul[D]+"'><img src='"+gambar[D].replace(/\/s[0-9]+(\-c)?/,"/w"+width+"-h"+height+"-p-k-no-nu")+"' alt='"+judul[D]+"' title='"+judul[D]+"'/></a></div>";q+="<a href='"+urls[D]+"' class='judul'>"+judul[D]+"</a>";q+="</li>";document.write(q);r++;if(r==jumlah){break}} if(D<judul.length-1){D++}else{D=0}if(D==z){break}}};
+        var simg = getQueryVariable("si"),
+            rsimg = (simg == false) ? "/s100-c/" : "/" + simg + "/";
+        function relpostimgcuplik(r) {
+            for (var l = 0; l < r.feed.entry.length; l++) {
+                var e = r.feed.entry[l];
+                reljudul[relnojudul] = e.title.$t, postcontent = "", "content" in e ? postcontent = e.content.$t : "summary" in e && (postcontent = e.summary.$t), relcuplikan[relnojudul] = saringtags(postcontent, numchars), postimg = "media$thumbnail" in e ? e.media$thumbnail.url.replace(/.*?:\/\//g, "//").replace(/\/s[0-9]+(\-c)?\//, rsimg) : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAA3NCSVQICAjb4U/gAAAADElEQVQImWOor68HAAL+AX7vOF2TAAAAAElFTkSuQmCC", relgambar[relnojudul] = postimg;
+                for (var t = 0; t < e.link.length; t++)
+                    if ("alternate" == e.link[t].rel) {
+                        relurls[relnojudul] = e.link[t].href;
+                        break
+                    }
+                relnojudul++
+            }
+        }
+        function contains(r, l) {
+            for (var e = 0; e < r.length; e++)
+                if (r[e] == l) return !0;
+            return !1
+        }
+        function artikelterkait() {
+            for (var r = new Array(0), l = new Array(0), e = new Array(0), t = new Array(0), a = 0; a < relurls.length; a++) contains(r, relurls[a]) || (r.length += 1, r[r.length - 1] = relurls[a], l.length += 1, l[l.length - 1] = reljudul[a], e.length += 1, e[e.length - 1] = relcuplikan[a], t.length += 1, t[t.length - 1] = relgambar[a]);
+            for (reljudul = l, relurls = r, relcuplikan = e, relgambar = t, a = 0; a < reljudul.length; a++) {
+                var n = Math.floor((reljudul.length - 1) * Math.random()),
+                    u = reljudul[a],
+                    i = relurls[a],
+                    s = relcuplikan[a],
+                    o = relgambar[a];
+                reljudul[a] = reljudul[n], relurls[a] = relurls[n], relcuplikan[a] = relcuplikan[n], relgambar[a] = relgambar[n], reljudul[n] = u, relurls[n] = i, relcuplikan[n] = s, relgambar[n] = o
+            }
+            for (var g, c = 0, p = Math.floor((reljudul.length - 1) * Math.random()), m = p, d = getQueryVariable("post"); c < relmaxtampil && (relurls[p] == d || (g = "<li>", g += "<a href='" + relurls[p] + "' rel='nofollow' target='_blank' title='" + reljudul[p] + "'><img src='" + relgambar[p] + "' /></a>", g += "<a class='relinkjdulx' href='" + relurls[p] + "' target='_blank'>" + reljudul[p] + "</a>", g += "<span class='news-text'>" + relcuplikan[p] + " ... </span>", g += "</li>", document.write(g), ++c != relmaxtampil)) && (p < reljudul.length - 1 ? p++ : p = 0, p != m););
+        }
+        for (var labels = getQueryVariable("labels"), relmaxtampil = getQueryVariable("num"), url = getQueryVariable("url"), res = labels.split(","), i = 0, text = ""; res[i];) text += '<script src="' + url + "/feeds/posts/default/-/" + res[i] + '?alt=json&amp;callback=relpostimgcuplik&amp;max-results=100"><\/script>', i++;
+        var relnojudul = 0,
+            numchars = 120,
+            reljudul = new Array,
+            relurls = new Array,
+            relcuplikan = new Array,
+            relgambar = new Array;
+        document.write(text + '<script>artikelterkait();<\/script>');
         //]]></script>
     </body>
   </html>
