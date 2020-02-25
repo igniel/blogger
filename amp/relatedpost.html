@@ -1,0 +1,39 @@
+<body>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta content='width=device-width, initial-scale=1' name='viewport'>
+      <title>Related Posts Blogger</title>
+      <style>
+        body {
+          font: 400 16px 'Open Sans', Arial, sans-serif;
+          background-color:#fff;
+          margin:0px;
+          padding:0px;
+          color:#333;
+        }
+        a {
+          color:#e50a4a;
+          text-decoration:none;
+        }
+        a:hover {color:#0379C4}
+      </style>
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&amp;display=swap&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet"/>
+    </head>
+    <body>
+      <script>//<![CDATA[
+        function getQueryVariable(variable) {
+          var query = window.location.search.substring(1);
+          var vars = query.split("&");
+          for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+          }
+          return(false);
+        }
+        var homePage = getQueryVariable("url"), jumlah = getQueryVariable("jumlah"), width = getQueryVariable("width"), height = getQueryVariable("height");
+        var rel = 0, judul=new Array(), urls=new Array(), gambar=new Array(); function filter(g,h){var e=g.split("<");for(var f=0;f<e.length;f++){if(e[f].indexOf(">")!=-1){e[f]=e[f].substring(e[f].indexOf(">")+1,e[f].length)}}e=e.join("");e=e.substring(0,h-1);return e}function relpostimgcuplik(h){for(var e=0;e<h.feed.entry.length;e++){var g=h.feed.entry[e];judul[rel]=g.title.$t;postcontent="";if("content" in g){postcontent=g.content.$t}else{if("summary" in g){postcontent=g.summary.$t}};if("media$thumbnail" in g){postimg=g.media$thumbnail.url}else{postimg="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAA3NCSVQICAjb4U/gAAAADElEQVQImWOor68HAAL+AX7vOF2TAAAAAElFTkSuQmCC"}gambar[rel]=postimg;for(var f=0;f<g.link.length;f++){if(g.link[f].rel=="alternate"){urls[rel]=g.link[f].href;break}}rel++}}function contains(a,e){for(var f=0;f<a.length;f++){if(a[f]==e){return true}}return false} function ignielRelatedGrid(){var v=new Array(0);var w=new Array(0);var x=new Array(0);var A=new Array(0);for(var u=0;u<urls.length;u++){if(!contains(v,urls[u])){v.length+=1;v[v.length-1]=urls[u];w.length+=1;w[w.length-1]=judul[u];x.length+=1;A.length+=1;A[A.length-1]=gambar[u]}}judul=w;urls=v;gambar=A;for(var u=0;u<judul.length;u++){var B=Math.floor((judul.length-1)*Math.random());var i=judul[u];var s=urls[u];var C=gambar[u];judul[u]=judul[B];urls[u]=urls[B];gambar[u]=gambar[B];judul[B]=i;urls[B]=s;gambar[B]=C}var r=0;var D=Math.floor((judul.length-1)*Math.random());var z=D;var q;var t=document.URL;while(r<jumlah){if(urls[D]!=t){q="<li>";q+="<div class='thumb'><a href='"+urls[D]+"' title='"+judul[D]+"'><img src='"+gambar[D].replace(/\/s[0-9]+(\-c)?/,"/w"+width+"-h"+height+"-p-k-no-nu")+"' alt='"+judul[D]+"' title='"+judul[D]+"'/></a></div>";q+="<a href='"+urls[D]+"' class='judul'>"+judul[D]+"</a>";q+="</li>";document.write(q);r++;if(r==jumlah){break}} if(D<judul.length-1){D++}else{D=0}if(D==z){break}}};
+        //]]></script>
+    </body>
+  </html>
+</body>
