@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+    <title>Recent Posts Blogger</title>
+    <link href="https://1.bp.blogspot.com/-XoYVj_ny8ys/WCGuacPhoxI/AAAAAAAANks/0gMrbTXd_KY6oG25R5VuLUJtQ-wXAE-CgCLcB/s57/logo-AMP-1.png" rel="icon" type="image/x-icon"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&amp;display=swap&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet"/>
+    <style>
+      /* I made this for SILEGAN theme (Blogger version) under THEMESON's partnership */
+      body {
+        font: 400 14px 'Open Sans', Arial, sans-serif;
+        background-color: #fff;
+        margin: 0px;
+        padding: 0px;
+        color: #333;
+      }
+      a {
+        color: #e50a4a;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      a:hover {
+        color: #ac0838;
+      }
+      .clear{
+        clear: both;
+      }
+      #recentpost ul, #recentpost ul li{
+        list-style: none;
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+      }
+      #recentpost ul li:not(:last-child){
+        border-bottom: 1px dotted #e5e5e5;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+      #recentpost.one ul li:not(:last-child){
+        border-bottom: 0px;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+      }
+      #recentpost.one ul li {
+        float: left;
+        width: calc(25% - 6px);
+        padding: 3px !important;
+        line-height: 0px;
+      }
+      #recentpost.one .thumbnail img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+      }
+      #recentpost.two .thumbnail {
+        float: right;
+        margin-left: 15px;
+      }
+      #recentpost.two .date{
+        color: #444;
+        font-size: 10px;
+        margin-top: 5px;
+        text-transform: uppercase;
+      }
+      #recentpost.three ul li:not(:last-child) {
+        margin-bottom: 15px;
+      }
+      #recentpost.three .thumbnail {
+        margin-bottom: 5px;
+      }
+      #recentpost.three .thumbnail img {
+        max-width: 100%;
+        height: auto;
+      }
+      #recentpost.four ul li{
+        counter-increment: sileganRecent;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      #recentpost.four ul li:before{
+        content: counter(sileganRecent);
+        background-color: #e50a4a;
+        color: #fff;
+        font-weight:600;
+        display: block;
+        margin-right: 15px;
+        min-width: 30px;
+        min-height: 30px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+        transition: all .3s ease;
+      }
+      #recentpost.four ul li a{
+        flex-grow: 1;
+      }
+      #recentpost.four .thumbnail{
+        order: 2;
+        margin-left: 15px;
+      }
+      @media screen and (max-width:480px){
+        #recentpost.one ul li{
+          width: calc(50% - 6px);
+        }
+        #recentpost.two .thumbnail, #recentpost.four .thumbnail {
+          margin-left: 10px;
+        }
+        #recentpost.four ul li:before {
+          font-size: .75rem;
+          min-width: 25px;
+          min-height: 25px;
+          width: 25px;
+          height: 25px;
+          line-height: 25px;
+          margin-right: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="recentpost"></div>
+    <script>//<![CDATA[
+      function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+          var pair = vars[i].split("=");
+          if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+      }
+      function generateCss(q) {
+        var css       = document.createElement('style'),
+            sp2       = document.getElementById('recentpost'),
+            parentDiv = sp2.parentNode;
+        css.type = 'text/css';
+        if (css.styleSheet) css.styleSheet.cssText = q;
+        else css.appendChild(document.createTextNode(q));
+        parentDiv.insertBefore(css, sp2);
+      }
+      (function() {
+        var q = '#recentpost a {font-size:' + getQueryVariable('fontSize') + 'px;color:#' + getQueryVariable('color') + '}',
+            qq = '#recentpost.four ul li:before {background-color:#' + getQueryVariable('color') + '}';
+        generateCss(q);generateCss(qq);
+      })();
+
+      var urlblog = getQueryVariable("url"), imgSize = getQueryVariable('imgSize'), num = getQueryVariable("num");
+      function bloggerfeed(e, t) {
+        for (var n = e.split("<"), r = 0; r < n.length; r++) - 1 != n[r].indexOf(">") && (n[r] = n[r].substring(n[r].indexOf(">") + 1, n[r].length));
+        return n = n.join(""), n = n.substring(0, t - 1)
+      }
+      function showrecentpost(e) {
+        var style = getQueryVariable("style"), elem = document.getElementById('recentpost');        
+        if (style == 1) elem.classList.add("one");
+        else if (style == 2) elem.classList.add("two");
+        else if (style == 3) elem.classList.add("three");
+        else if (style == 4) elem.classList.add("four");
+        else elem.classList.add("four");
+
+        var t, n, r, a, i, s = "";
+        for (var d = 0; d < num && d != e.feed.entry.length; d++) {
+          t = e.feed.entry[d], n = t.title.$t, i = t.published.$t;
+          for (var l = 0; l < t.link.length; l++){
+            if ("alternate" == t.link[l].rel) {
+              r = t.link[l].href;
+              break
+            }
+          }
+          height = (style == 1 || style == 3) ? Math.floor(imgSize / 1.5) : imgSize;
+          a = "media$thumbnail" in t ? t.media$thumbnail.url : "https://1.bp.blogspot.com/-ltyYh4ysBHI/U04MKlHc6pI/AAAAAAAADQo/PFxXaGZu9PQ/s72/no-image.png", v = new Date(i).toDateString(), z = new Date(i), mo= z.toLocaleString('default', { month: 'long' });
+          const [, month, day, year] = v.split(' '), y = [mo, day].join(' '), date = [y, year].join(', ');
+          s += "<li>";     
+          s += "<div class='thumbnail'><a href='" + r + "' target='_blank' title='" + n + "'><img src='" + a.replace(/\/s[0-9]+(\-c)?/,"/w"+imgSize+"-h"+height+"-p-k-no-nu") + "' alt='" + n + "' title='" + n + "' width='" + imgSize + "' height='" + height + "'/></a></div>";
+          if (style != 1) {
+            s += "<a href='" + r + "' target='_blank' title='" + n + "'>" + n + "</a>";
+            if (style == 2) {
+              s += "<div class='date'>"+date+"</div>";
+            };
+            s += "<div class='clear'></div>";
+          }
+          s += "</li>";
+        }
+        document.getElementById('recentpost').innerHTML = "<ul>"+s+"</ul>";
+      }
+
+      function navigasifeed(e) {
+        var t, n; - 1 == e ? (t = urlprevious.indexOf("?"), n = urlprevious.substring(t)) : 1 == e ? (t = urlnext.indexOf("?"), n = urlnext.substring(t)) : n = "?start-index=1&max-results="+num+"&orderby=published&alt=json-in-script", n += "&callback=showrecentpost", incluirscript(n);
+      }
+
+      function incluirscript(e) {
+        1 == 0 && removerscript();
+        var t = urlblog + "/feeds/posts/default" + e,
+          n = document.createElement("script");
+        n.setAttribute("type", "text/javascript"), n.setAttribute("src", t), document.getElementsByTagName("head")[0].appendChild(n), startfeed = 1;
+      }
+      
+      onload = function() {
+        navigasifeed(0);
+      };
+      //]]></script>
+  </body>
+</html>
